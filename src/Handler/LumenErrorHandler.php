@@ -51,10 +51,10 @@ class LumenErrorHandler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if($exception->getPrevious() instanceof OResponseException) {
+        if($exception->getPrevious() instanceof ResponseException) {
             $exception = $exception->getPrevious();
         }
-        if($exception instanceof OResponseException) {
+        if($exception instanceof ResponseException) {
             $request->header('Accept' , 'application/json');
             $errors = $exception->errors;
             $code = $exception->statusCode;
