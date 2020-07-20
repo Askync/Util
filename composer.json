@@ -17,5 +17,12 @@
         "psr-4": {
             "Askync\\Utils\\": "src"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Askync\\Utils\\UtilsServiceProvider"
+            ]
+        }
     }
 }
