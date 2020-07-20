@@ -3,7 +3,7 @@
     "description": "Utilities for laravel/lumen framework",
     "type": "library",
     "require": {
-        "guzzlehttp/guzzle": "^7.0"
+        "guzzlehttp/guzzle": "^6.*"
     },
     "license": "mit",
     "authors": [

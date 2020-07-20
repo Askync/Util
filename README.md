@@ -1,5 +1,6 @@
-# Askync/Utils
-###Some Api Utilities for laravel/lumen framework
+#Askync/Utils  
+
+###Some Api Utilities for laravel/lumen framework  
 
 Success Response  
 ```php
@@ -20,7 +21,7 @@ Throw Error as Response, Break the process and return response from anywhere in 
 ```
 
 
-##Setup
+##Setup  
 bootstrap/app.php
 ```php
     ...
