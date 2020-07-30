@@ -21,7 +21,13 @@ class UtilsServiceProvider extends Provider
      */
     public function register()
     {
-//        $this->app->configure('cors');
+        if(!class_exists('\Illuminate\Foundation\Application')) {
+            $this->app->configure('cors');
+            $this->app->routeMiddleware([
+                'cors' => Cors::class,
+            ]);
+        }
+
 
         $this->app->bind(Teleport::class, function (){
             return new Teleport();
@@ -33,9 +39,7 @@ class UtilsServiceProvider extends Provider
             return new ResourceWrapper();
         });
 
-        $this->app->routeMiddleware([
-            'cors' => Cors::class,
-        ]);
+
 
         $this->publishes([
             __DIR__ . '/config/cors.php' => config_path('cors.php')
