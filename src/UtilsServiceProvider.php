@@ -21,7 +21,7 @@ class UtilsServiceProvider extends Provider
      */
     public function register()
     {
-        $this->app->configure('cors');
+//        $this->app->configure('cors');
 
         $this->app->bind(Teleport::class, function (){
             return new Teleport();
