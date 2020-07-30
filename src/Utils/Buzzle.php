@@ -51,7 +51,12 @@ class Buzzle
         $client = new Client(['http_errors' => false]);
         $this->header['Content-Type'] = (isset($this->header['Content-Type'])) ? $this->header['Content-Type'] : 'application/json';
         $this->header['Accept'] = (isset($this->header['Accept'])) ? $this->header['Accept'] : 'application/json';
-        $this->header['Authorization'] = (isset($this->header['Authorization'])) ? $this->header['Authorization'] : 'Basic ==';
+        if(isset($this->header['Authorization'])) {
+            $this->header['Authorization'] = (isset($this->header['Authorization'])) ? $this->header['Authorization'] : 'Basic ==';
+        }
+        if(isset($this->header['encoding'])) {
+            $this->header['encoding'] = (isset($this->header['encoding'])) ? $this->header['encoding'] : 'application/json';
+        }
 
         $options['headers'] = $this->header;
 
@@ -88,9 +93,9 @@ class Buzzle
             return $body;
 
         } catch (\Exception $e) {
-                if($this->logEnabled) {
+            if($this->logEnabled) {
 
-                }
+            }
             return null;
         }
     }
