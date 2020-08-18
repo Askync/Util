@@ -2,9 +2,7 @@
     "name": "askync/utils",
     "description": "Utilities for laravel/lumen framework",
     "type": "library",
-    "require": {
-        "guzzlehttp/guzzle": "^6.5"
-    },
+    "require": {},
     "license": "mit",
     "authors": [
         {
