@@ -19,7 +19,7 @@ class Client
      */
     private $config;
 
-    public function __construct(array $config=[], array $options = [])
+    public function __construct(array $config=['expectJson' => true], array $options = [])
     {
         $this->config = new \stdClass();
         foreach ($config as $key=>$value) {
