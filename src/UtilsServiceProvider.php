@@ -22,7 +22,9 @@ class UtilsServiceProvider extends Provider
     public function register()
     {
         if(!class_exists('\Illuminate\Foundation\Application')) {
-            $this->app->configure('cors');
+            $this->mergeConfigFrom(
+                __DIR__.'/config/cors.php', 'cors'
+            );
             $this->app->routeMiddleware([
                 'cors' => Cors::class,
             ]);
