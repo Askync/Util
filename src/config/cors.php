@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'allowed_origins' => ['*'],
-    'allowed_headers' => [ 'X-Requested-With' ]
+    'allowed_origins' => explode( env(',','CORS_DOMAIN'), '*' ),
+    'allowed_headers' => explode( env(',','CORS_HEADER_ALLOWED'), 'X-Requested-With' )
 ];
