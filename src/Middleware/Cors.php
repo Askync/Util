@@ -22,7 +22,7 @@ class Cors
             'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS, PATCH, PUT, DELETE',
             'Access-Control-Allow-Credentials' => 'true',
             'Access-Control-Max-Age'           => '86400',
-            'Access-Control-Allow-Headers'     => implode(', ', array_merge( config('cors.allowed_headers'), $allHeaders ))
+            'Access-Control-Allow-Headers'     => (1== config('cors.allow_all_header')) ? true : implode(', ', array_merge( config('cors.allowed_headers'), $allHeaders ))
         ];
 
         if ($request->isMethod('OPTIONS'))
