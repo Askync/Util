@@ -9,7 +9,9 @@ class Cors
 {
     public function handle($request, Closure $next)
     {
-        $allHeaders = app()->request->headers->all();
+
+
+        $allHeaders = $request->headers->all();
         $allHeaders = array_merge([
             'Content-Type',
             'Authorization',
@@ -19,18 +21,20 @@ class Cors
 
         $headers = [
             'Access-Control-Allow-Origin'      => implode(', ', config('cors.allowed_origins')),
-            'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS, PATCH, PUT, DELETE',
+            'Access-Control-Allow-Methods'     => 'HEAD, GET, POST, PUT, PATCH, DELETE, OPTIONS',
             'Access-Control-Allow-Credentials' => 'true',
             'Access-Control-Max-Age'           => '86400',
-            'Access-Control-Allow-Headers'     => (1== config('cors.allow_all_header')) ? true : implode(', ', array_merge( config('cors.allowed_headers'), $allHeaders ))
+//            'Access-Control-Allow-Headers'     => (1== config('cors.allow_all_header')) ? '*' : implode(', ', array_merge( config('cors.allowed_headers'), $allHeaders ))
+            'Access-Control-Allow-Headers'     => $request->header('Access-Control-Request-Headers'),
         ];
 
-        if ($request->isMethod('OPTIONS'))
-        {
-            return response()->json('{"method":"OPTIONS"}', 200, $headers);
-        }
 
         $response = $next($request);
+
+        if ($request->isMethod('OPTIONS')) {
+            $response = response()->json('{"method":"OPTIONS"}', 200);
+        }
+
         foreach($headers as $key => $value)
         {
             $response->header($key, $value);
