@@ -10,6 +10,7 @@ class Client
         'headers' => ['Content-Type' => 'application/json', 'Accept' => 'application/json'],
         'params' => [],
         'serialized_header' => [],
+        'more' => []
     ];
 
     /*
@@ -25,6 +26,7 @@ class Client
         foreach ($config as $key=>$value) {
             $this->config->{$key} = $value;
         }
+        $this->options['more'] = $options;
     }
 
     public function setConfig($configName, $value)
@@ -122,7 +124,11 @@ class Client
             $curlObj = curl_init($this->getOptions('url'));
             curl_setopt($curlObj, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curlObj, CURLOPT_POST, true);
-            curl_setopt($curlObj, CURLOPT_POSTFIELDS, $this->getOptions('params'));
+            if( isset($this->getOptions('more')['http_build_query']) && $this->getOptions('more')['http_build_query'] ) {
+                curl_setopt($curlObj, CURLOPT_POSTFIELDS, http_build_query($this->getOptions('params')));
+            } else {
+                curl_setopt($curlObj, CURLOPT_POSTFIELDS, $this->getOptions('params'));
+            }
 
             curl_setopt($curlObj, CURLOPT_FOLLOWLOCATION, true);
             curl_setopt($curlObj, CURLOPT_HTTPHEADER, $this->getOptions('serialized_header'));
@@ -152,8 +158,12 @@ class Client
             curl_setopt($curlObj, CURLOPT_RETURNTRANSFER, true);
 //            curl_setopt($curlObj, CURLOPT_POST, true);
             curl_setopt($curlObj, CURLOPT_CUSTOMREQUEST, 'PATCH');
-            curl_setopt($curlObj, CURLOPT_POSTFIELDS, $this->getOptions('params'));
-
+//            curl_setopt($curlObj, CURLOPT_POSTFIELDS, $this->getOptions('params'));
+            if( isset($this->getOptions('more')['http_build_query']) && $this->getOptions('more')['http_build_query'] ) {
+                curl_setopt($curlObj, CURLOPT_POSTFIELDS, http_build_query($this->getOptions('params')));
+            } else {
+                curl_setopt($curlObj, CURLOPT_POSTFIELDS, $this->getOptions('params'));
+            }
             curl_setopt($curlObj, CURLOPT_FOLLOWLOCATION, true);
             curl_setopt($curlObj, CURLOPT_HTTPHEADER, $this->getOptions('serialized_header'));
 
@@ -180,8 +190,12 @@ class Client
             curl_setopt($curlObj, CURLOPT_RETURNTRANSFER, true);
 //            curl_setopt($curlObj, CURLOPT_POST, true);
             curl_setopt($curlObj, CURLOPT_CUSTOMREQUEST, 'PUT');
-            curl_setopt($curlObj, CURLOPT_POSTFIELDS, $this->getOptions('params'));
-
+//            curl_setopt($curlObj, CURLOPT_POSTFIELDS, $this->getOptions('params'));
+            if( isset($this->getOptions('more')['http_build_query']) && $this->getOptions('more')['http_build_query'] ) {
+                curl_setopt($curlObj, CURLOPT_POSTFIELDS, http_build_query($this->getOptions('params')));
+            } else {
+                curl_setopt($curlObj, CURLOPT_POSTFIELDS, $this->getOptions('params'));
+            }
             curl_setopt($curlObj, CURLOPT_FOLLOWLOCATION, true);
             curl_setopt($curlObj, CURLOPT_HTTPHEADER, $this->getOptions('serialized_header'));
 
@@ -236,8 +250,12 @@ class Client
             $curlObj = curl_init($this->getOptions('url'));
             curl_setopt($curlObj, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curlObj, CURLOPT_CUSTOMREQUEST, 'HEAD');
-            curl_setopt($curlObj, CURLOPT_POSTFIELDS, $this->getOptions('params'));
-
+//            curl_setopt($curlObj, CURLOPT_POSTFIELDS, $this->getOptions('params'));
+            if( isset($this->getOptions('more')['http_build_query']) && $this->getOptions('more')['http_build_query'] ) {
+                curl_setopt($curlObj, CURLOPT_POSTFIELDS, http_build_query($this->getOptions('params')));
+            } else {
+                curl_setopt($curlObj, CURLOPT_POSTFIELDS, $this->getOptions('params'));
+            }
             curl_setopt($curlObj, CURLOPT_FOLLOWLOCATION, true);
             curl_setopt($curlObj, CURLOPT_HTTPHEADER, $this->getOptions('serialized_header'));
 
@@ -263,8 +281,12 @@ class Client
             $curlObj = curl_init($this->getOptions('url'));
             curl_setopt($curlObj, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curlObj, CURLOPT_CUSTOMREQUEST, 'OPTIONS');
-            curl_setopt($curlObj, CURLOPT_POSTFIELDS, $this->getOptions('params'));
-
+//            curl_setopt($curlObj, CURLOPT_POSTFIELDS, $this->getOptions('params'));
+            if( isset($this->getOptions('more')['http_build_query']) && $this->getOptions('more')['http_build_query'] ) {
+                curl_setopt($curlObj, CURLOPT_POSTFIELDS, http_build_query($this->getOptions('params')));
+            } else {
+                curl_setopt($curlObj, CURLOPT_POSTFIELDS, $this->getOptions('params'));
+            }
             curl_setopt($curlObj, CURLOPT_FOLLOWLOCATION, true);
             curl_setopt($curlObj, CURLOPT_HTTPHEADER, $this->getOptions('serialized_header'));
 
