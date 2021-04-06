@@ -16,12 +16,13 @@ class Response
     const RESPONSE_STYLE_ERROR_CODE = 1;
     const RESPONSE_STYLE_SUCCESS_STATE = 2;
     const RESPONSE_STYLE_SUCCES_ONLY_DATA = 3;
+    const RESPONSE_STYLE_SUCCESS_MESSAGE = 4;
 
     protected $style = self::RESPONSE_STYLE_ERROR_CODE;
 
     public function __construct()
     {
-        if( in_array(env('ASKYNCRES_STYLE', 1), [self::RESPONSE_STYLE_ERROR_CODE, self::RESPONSE_STYLE_SUCCES_ONLY_DATA, self::RESPONSE_STYLE_SUCCESS_STATE]) )
+        if( in_array(env('ASKYNCRES_STYLE', 1), [self::RESPONSE_STYLE_ERROR_CODE, self::RESPONSE_STYLE_SUCCES_ONLY_DATA, self::RESPONSE_STYLE_SUCCESS_STATE, self::RESPONSE_STYLE_SUCCESS_MESSAGE]) )
         {
             $this->style = env('ASKYNCRES_STYLE', 1);
         }
@@ -49,6 +50,13 @@ class Response
                     'description' => $description,
                     'data' => $data
                 ];
+            case self::RESPONSE_STYLE_SUCCESS_MESSAGE :
+                return [
+                    'success' => true,
+                    'response_code' => 200,
+                    'message' => $description,
+                    'data' => $data
+                ];
             case self::RESPONSE_STYLE_SUCCES_ONLY_DATA :
                 return $data;
             case self::RESPONSE_STYLE_ERROR_CODE :
@@ -69,6 +77,15 @@ class Response
                     'success' => false,
                     'description' => $description,
                     'code' => $errorCode,
+                    'errors' => $errors,
+                ];
+                $debug && $build['debug'] = $debug;
+                return $build;
+            case self::RESPONSE_STYLE_SUCCESS_MESSAGE :
+                $build = [
+                    'success' => false,
+                    'message' => $description,
+                    'response_code' => $errorCode,
                     'errors' => $errors,
                 ];
                 $debug && $build['debug'] = $debug;
