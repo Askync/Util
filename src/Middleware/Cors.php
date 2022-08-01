@@ -30,9 +30,11 @@ class Cors
             $response = response()->json(["method" =>"OPTIONS"], 200);
         }
 
-        foreach($headers as $key => $value)
-        {
-            $response->header($key, $value);
+        if($response) {
+            foreach($headers as $key => $value)
+            {
+                $response->header($key, $value);
+            }
         }
 
         return $response;
